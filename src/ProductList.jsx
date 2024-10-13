@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { useSelector,  useDispatch } from 'react-redux';
 import './ProductList.css'
 import CartItem from './CartItem';
-import addItem from './CartSlice';
+import {addItem} from './CartSlice';
 
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
@@ -231,7 +231,7 @@ function ProductList() {
     padding: '15px',
     display: 'flex',
     justifyContent: 'space-between',
-    alignIems: 'center',
+    alignItems: 'center',
     fontSize: '20px',
    }
    const styleObjUl={
