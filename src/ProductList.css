@@ -97,18 +97,26 @@ body {
 }
 
 .product-button {
-    background-color: #e74c3c;
-    color: #fff;
+    background-color: #4CAF50; /* Green */
     border: none;
+    color: white;
     padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-    margin-top: 10px;
-}
-
-.product-button:hover {
-    background-color: #c0392b;
-}
+  }
+  
+  .product-button:hover {
+    background-color: #45a049;
+  }
+  
+  .product-button.added-to-cart {
+    background-color: grey; /* Grey when product is added */
+  }
 
 /* Pseudo-elements - Sale badge */
 .product-card::before {
@@ -196,27 +204,7 @@ body {
 }
 /* ProductList.css */
 
-.product-button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-  }
-  
-  .product-button:hover {
-    background-color: #45a049;
-  }
-  
-  .product-button.added-to-cart {
-    background-color: grey; /* Grey when product is added */
-  }
+
   @media (max-width: 1200px) {
     .product-card {
       flex: 1 1 calc(33.33% - 20px); /* Adjust width for 3 cards per row with 20px gap on medium screens */

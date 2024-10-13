@@ -7,18 +7,21 @@ import {addItem} from './CartSlice';
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-    const [addedToCart, setAddedToCart] = useState({
-        value: 'Add to Cart',
-        added: false,
-    });
+    const [addedToCart, setAddedToCart] = useState({});
     const dispatch = useDispatch();
     const totalQuantity = useSelector(state => state.cart.totalQuantity);
 
     const handleAddToCart = (plant) => {
         dispatch(addItem({name: plant.name, image: plant.image, cost: plant.cost}))
         setAddedToCart(prevState => ({
-            value: prevState.added ? 'Add to Cart' : 'Added to Cart',
-            added: !prevState.added,
+            ...prevState,
+            [plant.name]: true,
+        }));
+    }
+    const handleDeleteFromCart = (plant) => {
+        setAddedToCart(prevState => ({
+            ...prevState,
+            [plant.name]: false,
         }));
     }
     const plantsArray = [
@@ -307,7 +310,11 @@ function ProductList() {
                                     <h2 className='product-title'>{plant.name}</h2>
                                     <p className='product-description'>{plant.description}</p>
                                     <p className='product-price'>{plant.cost}</p>
-                                    <button className='product-button' onClick={() => handleAddToCart(plant)} disabled={addedToCart.added}>{addedToCart.value}</button>
+                                    <button 
+                                        className={`product-button ${addedToCart[plant.name] ? 'added-to-cart' : ''}`} 
+                                        onClick={() => handleAddToCart(plant)} disabled={addedToCart[plant.name]}>
+                                        {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
+                                    </button>
                                 </div>
                             ))}
                         </div>
@@ -315,7 +322,7 @@ function ProductList() {
                 ))}
             </div>
             ) :  (
-                <CartItem onContinueShopping={handleContinueShopping} removeFromCart={handleAddToCart}/>
+                <CartItem onContinueShopping={handleContinueShopping} onDeleteFromCart={handleDeleteFromCart}/>
             )}
         </div>
     );
